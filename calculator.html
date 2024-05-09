@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        h1{
+            font-family: Georgia, serif;
+        }
+        .box{
+            height: 500px;
+            width: 403px;
+            background-color: rgb(60, 60, 143);
+            border-radius: 10px;
+            margin: auto;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+        .input{
+            width: 355px;
+            height: 90px;
+            background-color: rgb(193, 193, 193);
+            border-radius: 5px;
+            margin-left: 20px;
+            margin-right: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+            font-weight: bolder;
+            font-size: 60px;
+        }
+        p{
+            display: inline-block;
+            font-size: 1.5em;
+            margin: 0;
+            padding: 0;
+        }
+        h1{
+            padding-bottom: 30px;
+        }
+        .buttons{
+            display: flex;
+            background-color: rgb(193, 193, 193);
+            height: 360px;
+            width: 362px;
+            display: block;
+            margin-left: 20px;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+        .first{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            font-family: Georgia, serif;
+            padding-right: 30px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .last{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            font-family: Georgia, serif;
+        }
+        .last li{
+            display: inline-block;
+            margin-right: 38px;
+            margin-top: 15px;
+            color: white;
+            background-color: rgb(60, 60, 143);
+            border-radius: 5px;
+            padding: 10px;
+            height: 20px;
+            width: 100px;
+            text-align: center;
+            cursor: pointer;
+            margin-left: -13px;
+        }
+        .first li{
+            display: inline-block;
+            margin-right: 23px;
+            margin-top: 15px;
+            color: white;
+            background-color: rgb(60, 60, 143);
+            border-radius: 5px;
+            padding: 10px;
+            height: 20px;
+            width: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .first li:hover{
+            transform: scale(1.3);
+            background-color: rgb(40, 40, 130);
+        }
+        .last li:hover{
+            transform: scale(1.1);
+            background-color: rgb(40, 40, 130);
+        }
+    </style>
+</head>
+<body>
+    <center><h1>Simple Calculator</h1></center>
+    <div class="box">
+        <div class="input" id="result">0</div>
+        <div class="buttons">
+            <div class="one">
+                <ul class="first">
+                    <li id="a" onclick="appendValue('9')">9</li>
+                    <li id="b" onclick="appendValue('8')">8</li>
+                    <li id="c" onclick="appendValue('7')">7</li>
+                    <li id="q" onclick="appendValue('+')">+</li>
+                </ul>
+            </div>
+            <div class="two">
+                <ul class="first">
+                    <li id="e" onclick="appendValue('6')">6</li>
+                    <li id="f" onclick="appendValue('5')">5</li>
+                    <li id="g" onclick="appendValue('4')">4</li>
+                    <li id="r" onclick="appendValue('-')">-</li>
+                </ul>
+            </div>
+            <div class="three">
+                <ul class="first">
+                    <li id="i" onclick="appendValue('3')">3</li>
+                    <li id="j" onclick="appendValue('2')">2</li>
+                    <li id="k" onclick="appendValue('1')">1</li>
+                    <li id="t" onclick="appendValue('*')">*</li>
+                </ul>
+            </div>
+            <div class="four">
+                <ul class="first">
+                    <li id="m" onclick="appendValue('.')">.</li>
+                    <li id="n" onclick="appendValue('0')">0</li>
+                    <li id="l" onclick="calculate()">=</li>
+                    <li id="t" onclick="appendValue('/')">/</li>
+                </ul>
+            </div>
+            <div class="five">
+                <ul class="last">
+                    <li id="d" onclick="deleteLast()">DEL</li>
+                    <li id="h" onclick="clearInput()">C</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        function appendValue(value)
+        {
+            var input = document.getElementById("result");
+            var currentValue = input.innerText;
+
+            if (currentValue === "0")
+            {
+                input.innerText = value;
+            } else {
+                input.innerText += value;
+            }
+        }
+
+        function clearInput()
+        {
+            document.getElementById("result").innerText = "0";
+        }
+
+        function deleteLast()
+        {
+            var input = document.getElementById("result");
+            var currentValue = input.innerText;
+            if (currentValue.length === 1)
+            {
+                input.innerText = "0";
+            } else
+            {
+                input.innerText = currentValue.slice(0, -1);
+            }
+        }
+
+        function calculate()
+        {
+            var input = document.getElementById("result");
+            var expression = input.innerText;
+            try
+            {
+                var result = eval(expression);
+                input.innerText = result;
+            }
+            catch (error)
+            {
+                input.innerText = "Error";
+            }
+        }
+    </script>
+</body>
+</html>
